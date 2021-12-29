@@ -10,3 +10,9 @@ const circ = (diameter: number)=>{
 }
 
 console.log(circ(4));
+ 
+ const rect = (a:number,b:number):number => {
+     return a*b;
+ }
+
+ console.log(rect(1,2))
