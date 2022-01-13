@@ -1,4 +1,5 @@
 import { InvoiceOne } from "./classes/invoice.js";
+import { Payments } from "./classes/Payments.js";
 //During development time TS does not know if there is some kind of anchor tag in the html.
 //Therefore, trying to access any property of 'a' tag will throw error.
 //const anchor = document.querySelector(a)
@@ -36,12 +37,30 @@ console.log(invoices);
 //Another way to write class when access specifiers are present. Important: only when access specifiers are present.
 const inv3 = new InvoiceOne("Sammy", "for goods", 2000);
 console.log(inv3.format());
-//Modules
-//Typescript doesnot compile down the ES6 module system in older broswer so use newer browsers.
-//To target for modern broswer: 
-//In tsconfig file:
-//1. module:"es2015"
-//2. target:es6 //To target modern browsers.
-//Interface
-//TS has interfaces but JS doesnot.
-//Interface allows us to enforce a certain structure to a class or an object.
+const me = {
+    name: "Sonali",
+    age: 24,
+    speak(text) {
+        console.log(text);
+    },
+    spent(amount) {
+        console.log(amount);
+        return amount;
+    }
+};
+console.log(me.speak("Hello world"));
+//const someOne:isPerson; cam be initialized later.
+let greet;
+greet = (person) => {
+    console.log("Hi", person.name);
+};
+greet(me);
+//2.Interface with classes
+let docOne;
+let docTwo;
+docOne = new Invoice("Yoshida", "Food", 10);
+docTwo = new Payments("Mario", "Books", 345);
+let docs = [];
+docs.push(docOne);
+docs.push(docTwo);
+console.log(docs);

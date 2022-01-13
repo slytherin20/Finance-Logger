@@ -1,5 +1,6 @@
 import { InvoiceOne } from "./classes/invoice.js";
-
+import { Payments } from "./classes/Payments.js";
+import { HasFormatter } from "./interfaces/HasFormatter.js";
 //During development time TS does not know if there is some kind of anchor tag in the html.
 //Therefore, trying to access any property of 'a' tag will throw error.
 //const anchor = document.querySelector(a)
@@ -71,3 +72,46 @@ console.log(inv3.format())
 //Interface
 //TS has interfaces but JS doesnot.
 //Interface allows us to enforce a certain structure to a class or an object.
+
+//1.Interface with an object.
+interface isPerson{
+    name:string,
+    age:number,
+    speak(a:string):void,
+    spent(a:number):number
+}
+
+const me:isPerson = {
+    name:"Sonali",
+    age:24,
+    speak(text:string):void{
+        console.log(text)
+    },
+    spent(amount:number):number{
+        console.log(amount)
+        return amount;
+    }
+}
+console.log(me.speak("Hello world"))
+
+//const someOne:isPerson; cam be initialized later.
+
+let greet:(a:isPerson)=> void;
+
+greet = (person:isPerson):void => {
+    console.log("Hi",person.name)
+}
+
+greet(me)
+
+//2.Interface with classes
+let docOne:HasFormatter;
+let docTwo:HasFormatter;
+ docOne = new Invoice("Yoshida","Food",10);
+ docTwo = new Payments("Mario","Books",345)
+
+ let docs:HasFormatter[] = [];
+ docs.push(docOne)
+ docs.push(docTwo)
+
+ console.log(docs)

@@ -1,4 +1,6 @@
-export class InvoiceOne{
+import { HasFormatter } from "../interfaces/HasFormatter.js"
+
+export class InvoiceOne implements HasFormatter{
     //  readonly client:string;  //Allows only read inside and outside the class.
      // private details:string;  //Allows accessing the property only inside the class.
      // public amount:number;    //Default. Allows access to property both inside and outside the class.
