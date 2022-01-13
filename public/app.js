@@ -1,4 +1,5 @@
 import { InvoiceOne } from "./classes/invoice.js";
+import { ListTemplates } from "./classes/ListTemplates.js";
 import { Payments } from "./classes/Payments.js";
 //During development time TS does not know if there is some kind of anchor tag in the html.
 //Therefore, trying to access any property of 'a' tag will throw error.
@@ -9,12 +10,23 @@ const anchor = document.querySelector('a');
 console.log(anchor.href);
 const form = document.querySelector("form");
 const form1 = document.querySelector(".new-item-form");
-const input = document.querySelector("#type");
+const type = document.querySelector("#type");
+const details = document.querySelector("#details");
+const tofrom = document.querySelector("#tofrom");
 const amount = document.querySelector("#amount");
+//HTML List render
+const ul = document.querySelector('ul');
+let list = new ListTemplates(ul);
 form1.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log(input.value);
-    console.log(amount.valueAsNumber);
+    let doc;
+    if (type.value === "invoice") {
+        doc = new Invoice(tofrom.value, details.value, amount.valueAsNumber);
+    }
+    else {
+        doc = new Payments(tofrom.value, details.value, amount.valueAsNumber);
+    }
+    list.render(doc, type.value, 'start');
 });
 //Classes
 class Invoice {

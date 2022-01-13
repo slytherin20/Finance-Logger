@@ -1,4 +1,5 @@
 import { InvoiceOne } from "./classes/invoice.js";
+import { ListTemplates } from "./classes/ListTemplates.js";
 import { Payments } from "./classes/Payments.js";
 import { HasFormatter } from "./interfaces/HasFormatter.js";
 //During development time TS does not know if there is some kind of anchor tag in the html.
@@ -13,15 +14,27 @@ console.log(anchor.href)
 const form = document.querySelector("form")!;
 
 const form1 = document.querySelector(".new-item-form") as HTMLFormElement;
-
-const input = document.querySelector("#type") as HTMLSelectElement;
-
+const type = document.querySelector("#type") as HTMLSelectElement;
+const details = document.querySelector("#details") as HTMLInputElement;
+const tofrom = document.querySelector("#tofrom") as HTMLInputElement;
 const amount = document.querySelector("#amount") as HTMLInputElement;
+
+//HTML List render
+const ul = document.querySelector('ul')!;
+let list = new ListTemplates(ul);
 
 form1.addEventListener("submit",(e:Event)=>{
     e.preventDefault()
-    console.log(input.value)
-    console.log(amount.valueAsNumber)
+    let doc:HasFormatter;
+    if(type.value==="invoice"){
+        doc = new Invoice(tofrom.value,details.value,amount.valueAsNumber);
+    }
+    else{
+        doc = new Payments(tofrom.value,details.value,amount.valueAsNumber);
+    }
+
+    list.render(doc,type.value,'start')
+    
 })
 
 //Classes
